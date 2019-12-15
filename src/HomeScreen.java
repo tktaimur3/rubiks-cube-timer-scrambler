@@ -80,11 +80,18 @@ public class HomeScreen {
          * @throws IOException
          */
         public static String[] getTextFileValues(String textFileName) throws IOException {
-            //File is created with name in parameter. If it already exists, nothing happens
+            //Directory is created with name in parameter. If it already exists, nothing happens
+            File directory = new File(workingDir+"\\"+selectedCube);
+            if (!directory.exists()) {
+            	directory.mkdirs();
+                System.out.println("New directory created: " + workingDir);
+            }
+            
+            //File is created with the given name, it it already exists nothing happens
             File newFile = new File(workingDir+textFileName);
-            if (!newFile.exists()) {
-                    newFile.createNewFile();
-                    System.out.println("New File created: " + textFileName);
+            if (!newFile.exists()) { 
+            	newFile.createNewFile();
+            	System.out.println("New file created: " + workingDir+textFileName);
             }
             //Prints what file is being accessed for debugging purposes
             System.out.println("Accessing file: "+workingDir+textFileName);
@@ -578,11 +585,11 @@ public class HomeScreen {
          * @throws IOException 
          */
         private void initialize() throws IOException {
-                listOfTimes = getListOfTimes(selectedCube+"/Rubik'sTimes.txt");
+                listOfTimes = getListOfTimes(selectedCube+"\\Rubik'sTimes.txt");
                 
-                listOfAo5 = getListOfTimes(selectedCube+"/ao5.txt");
-                listOfAo3 = getListOfTimes(selectedCube+"/ao3.txt");
-                listOfAo12 = getListOfTimes(selectedCube+"/ao12.txt");
+                listOfAo5 = getListOfTimes(selectedCube+"\\ao5.txt");
+                listOfAo3 = getListOfTimes(selectedCube+"\\ao3.txt");
+                listOfAo12 = getListOfTimes(selectedCube+"\\ao12.txt");
                 
                 frame = new JFrame();
                 frame.setIconImage(Toolkit.getDefaultToolkit().getImage(workingDir+"icon.png"));
@@ -738,10 +745,10 @@ public class HomeScreen {
 				        
 				        //Update the times to match the chosen cubes times
 				        try {
-				        	listOfTimes = getListOfTimes(selectedCube+"/Rubik'sTimes.txt");    
-							listOfAo5 = getListOfTimes(selectedCube+"/ao5.txt");
-							listOfAo3 = getListOfTimes(selectedCube+"/ao3.txt");
-							listOfAo12 = getListOfTimes(selectedCube+"/ao12.txt");
+				        	listOfTimes = getListOfTimes(selectedCube+"\\Rubik'sTimes.txt");    
+							listOfAo5 = getListOfTimes(selectedCube+"\\ao5.txt");
+							listOfAo3 = getListOfTimes(selectedCube+"\\ao3.txt");
+							listOfAo12 = getListOfTimes(selectedCube+"\\ao12.txt");
 				        } catch (Exception ex) {
 				        	ex.printStackTrace();
 				        }
@@ -888,9 +895,9 @@ public class HomeScreen {
                                     	 //Add the time displayed to the start of the array
                                          listOfTimes.add(0, labelTime);
                                          //Write the file again to reflect the new time
-                                         rewriteFile(selectedCube+"/Rubik'sTimes.txt", listOfTimes);
+                                         rewriteFile(selectedCube+"\\Rubik'sTimes.txt", listOfTimes);
                                          //Update the array to match the times
-                                         listOfTimes = getListOfTimes(selectedCube+"/Rubik'sTimes.txt");
+                                         listOfTimes = getListOfTimes(selectedCube+"\\Rubik'sTimes.txt");
                                          
                                          //Set the list data in the list of times to the new array
                                          list.setListData(listOfTimes.toArray());
@@ -899,27 +906,27 @@ public class HomeScreen {
                                          String currentAo5 = ao5(listOfTimes);
                                          if (!currentAo5.equals("N/A")) {
                                          	listOfAo5.add(0, currentAo5);    
-                                         	rewriteFile(selectedCube+"/ao5.txt", listOfAo5);
+                                         	rewriteFile(selectedCube+"\\ao12.txt", listOfAo5);
                                          }
                                                  
                                          //Add current AO3 to the file
                                          String currentAo3 = ao3(listOfTimes);
                                          if (!currentAo3.equals("N/A")){
                                         	 listOfAo3.add(0, currentAo3);    
-                                         	rewriteFile(selectedCube+"/ao3.txt", listOfAo3);
+                                         	rewriteFile(selectedCube+"\\ao3.txt", listOfAo3);
                                          }
                                          
                                          //Add current AO12 to the file
                                          String currentAo12 = ao12(listOfTimes);
                                          if (!currentAo12.equals("N/A")){
                                         	 listOfAo12.add(0, currentAo12);    
-                                         	rewriteFile(selectedCube+"/ao12.txt", listOfAo12);
+                                         	rewriteFile(selectedCube+"\\ao12.txt", listOfAo12);
                                          }
                                          
                                          //Update the list of 5, 4 and 12 arrays to match the newly added data
-                                         listOfAo5 = getListOfTimes(selectedCube+"/ao5.txt");
-                                         listOfAo3 = getListOfTimes(selectedCube+"/ao3.txt");
-                                         listOfAo12 = getListOfTimes(selectedCube+"/ao12.txt");
+                                         listOfAo5 = getListOfTimes(selectedCube+"\\ao5.txt");
+                                         listOfAo3 = getListOfTimes(selectedCube+"\\ao3.txt");
+                                         listOfAo12 = getListOfTimes(selectedCube+"\\ao12.txt");
                                          
                                          //Set the current time to the latest time
                                          currentTime.setText(label.getText());
