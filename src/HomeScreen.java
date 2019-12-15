@@ -108,7 +108,7 @@ public class HomeScreen {
             reader.close();
             //Re-initialise the reader to read the same file from the beginning again
             reader = new BufferedReader(new FileReader(workingDir+textFileName));
-            
+
             //Create an array to store the lines, with the length being the count integer previously stated
             String[] arrayOfLines = new String[count];
             
@@ -261,7 +261,7 @@ public class HomeScreen {
             } catch (Exception e) {
                     return worstTime;
             }
-            
+
             //Iterate through for loop and get min time
             for (int i = 0; i < listOfTimes.size(); i++     ) {
                 if (max < TimeConversion.stringToSec(listOfTimes.get(i))) {
