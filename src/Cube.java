@@ -1,4 +1,8 @@
-
+/**
+ * @author Christopher Arune
+ * Purpose: Abstract class to be inherited cubes of different size
+ * Date: 21 January 2019
+ */
 
 public abstract class Cube {
 	
@@ -246,7 +250,6 @@ public abstract class Cube {
 		
 		int len = cubeSize-1;
 		
-		//char[] temp = faceOnTop[topRow];
 		char[] temp = new char[len+1];
 		
 		for(int i = 0; i < len+1; i++){
@@ -263,7 +266,6 @@ public abstract class Cube {
 		
 		int len = cubeSize - 1;		
 		
-		//char[] temp = faceOnTop[topRow];
 		char[] temp = new char[len+1];
 		
 		for(int i = 0; i < len+1; i++){
@@ -281,7 +283,6 @@ public abstract class Cube {
 		
 		int len = cubeSize - 1;		
 		
-		//char[] temp = faceOnTop[topRow];
 		char[] temp = new char[len+1];
 		
 		for(int i = 0; i < len+1; i++){
@@ -299,7 +300,6 @@ public abstract class Cube {
 		
 		int len = cubeSize - 1;		
 		
-		//char[] temp = faceOnTop[topRow];
 		char[] temp = new char[len+1];
 		
 		for(int i = 0; i < len+1; i++){
@@ -335,7 +335,6 @@ public abstract class Cube {
 		
 		int len = cubeSize - 1;		
 		
-		//char[] temp = faceOnTop[topRow];
 		char[] temp = new char[len+1];
 		
 		for(int i = 0; i < len+1; i++){

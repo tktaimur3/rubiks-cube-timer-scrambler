@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -15,11 +16,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -27,12 +26,12 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
-import java.awt.Toolkit;
 
 /**
  * @author Taimur Khan
- * Purpose: To create a Rubik's Cube scrambler and timer, allowing the user to view all their times and averages of 3, 5 and 12 of their times
- * Also stores their times into a text file and sorts them into a different text file
+ * Purpose: To create a Rubik's Cube scrambler and timer, allowing the user to view all their times and averages of 3, 5 and 12
+ * Also stores users' times into a text file
+ * Allows users to confirm that their scramble is correct with a scramble cube map in the bottom right
  * Date: 21 January 2019
  */
 public class HomeScreen {
@@ -144,40 +143,6 @@ public class HomeScreen {
         }//End reverseArray
         
         /**
-         * Get the best time in an array
-         * 
-         * @param listOfTimes
-         * @return the best time string
-         */
-        public static String getBestTime (String[] listOfTimes) {
-            //Set a default string return
-            String bestTime = "N/A";        
-            
-            //Init the minimum
-            float min = 0f;
-            //Try to init the minimum, if an error is thrown there is nothing in the array so return N/A
-            try {
-                    min = TimeConversion.stringToSec(listOfTimes[0]);
-            } catch (Exception e) {
-                    return bestTime;
-            }
-            
-            //Iterate through for loop and get min time
-            for (int i = 0; i < listOfTimes.length; i++     ) {
-                    if (min > TimeConversion.stringToSec(listOfTimes[i])) {
-                            min = TimeConversion.stringToSec(listOfTimes[i]);
-                    }
-                    
-            }
-         
-            //Set the best time
-            bestTime = String.valueOf(min);
-            
-            //Return the best time, properly formatted
-            return formatTime(bestTime);
-        }//End getBestTime
-        
-        /**
          * Get the best time in an array list
          * 
          * @param listOfTimes the array list of listOfTimes
@@ -198,8 +163,9 @@ public class HomeScreen {
             
             //Iterate through for loop and get min time
             for (int i = 0; i < listOfTimes.size(); i++) {
-                if (min > TimeConversion.stringToSec(listOfTimes.get(i))) {
-                        min = TimeConversion.stringToSec(listOfTimes.get(i));
+            	float val = TimeConversion.stringToSec(listOfTimes.get(i)); 
+                if (min > val ) {
+                	min = val;
                 }
             }
             
@@ -208,40 +174,7 @@ public class HomeScreen {
             
             //Return the best time, properly formatted
             return TimeConversion.secToString(Float.parseFloat(bestTime));
-        }//End getBestTime
-        
-        /**
-         * Get the worst time in an array
-         * 
-         * @param listOfTimes a list of times array
-         * @return the worst time string
-         */
-        public static String getWorstTime (String[] listOfTimes) {
-        	//Set a default string return
-            String worstTime = "N/A";        
-    
-            //Init max time float
-            float max = 0f;
-            //Try to init the maximum, if an error is thrown there is nothing in the array so return N/A
-            try {
-                    max = TimeConversion.stringToSec(listOfTimes[0]);
-            } catch (Exception e) {
-                    return worstTime ;
-            }
-            
-            //Iterate through for loop and get min time
-            for (int i = 0; i < listOfTimes.length; i++) {
-                    if (max < TimeConversion.stringToSec(listOfTimes[i])) {
-                            max = TimeConversion.stringToSec(listOfTimes[i]);
-                    }
-                    
-            }
-            //Set the worst time
-            worstTime = TimeConversion.secToString(Float.parseFloat(String.valueOf(max)));
-            
-            //Return the worst time
-            return worstTime;
-        }//End getWorstTime
+        }//End getBestTimes
         
         /**
          * Get the worst time in an array list
@@ -263,9 +196,10 @@ public class HomeScreen {
             }
 
             //Iterate through for loop and get min time
-            for (int i = 0; i < listOfTimes.size(); i++     ) {
-                if (max < TimeConversion.stringToSec(listOfTimes.get(i))) {
-                        max = TimeConversion.stringToSec(listOfTimes.get(i));
+            for (int i = 0; i < listOfTimes.size(); i++) {
+            	float val = TimeConversion.stringToSec(listOfTimes.get(i));
+                if (max < val) {
+                	max = val;
                 }
             }
             
@@ -312,7 +246,7 @@ public class HomeScreen {
             String d = df.format(sumOfTimes/3);
             
             //Return the string
-            return TimeConversion.secToString(Float.parseFloat(formatTime(d)));
+            return TimeConversion.secToString(sumOfTimes/3);
         }//End ao5
         
         /**
@@ -328,7 +262,7 @@ public class HomeScreen {
         	//Try to add each latest time into the array list from the top 5 array, if you can't there are <3 times so you cant get the avg
             try {
                 for (int i = 0; i < 3; i++) {
-                        top3.add(list.get(i));
+                	top3.add(list.get(i));
                 }
             } catch (Exception e) {
                     return "N/A";
@@ -339,14 +273,11 @@ public class HomeScreen {
             
             //Go through array list and add each index to sum of times
             for (int i = 0; i < top3.size(); i++) { 
-                    sumOfTimes += TimeConversion.stringToSec(top3.get(i));
+            	sumOfTimes += TimeConversion.stringToSec(top3.get(i));
             }
-            
-            //Format the time to three sig digs
-            DecimalFormat df = new DecimalFormat("#.##");
-            
+                        
             //Return the time, formatted
-            return TimeConversion.secToString(Float.parseFloat(df.format(sumOfTimes/3)));
+            return TimeConversion.secToString(sumOfTimes/3);
         }//End ao3
         
         /**
@@ -357,12 +288,12 @@ public class HomeScreen {
          */
         public static String ao12 (ArrayList<String> list) {
             //Create list of top 12 latest array
-                ArrayList<Float> top12 = new ArrayList<Float>();
+        	ArrayList<Float> top12 = new ArrayList<Float>();
                 
             //Try to add each latest time into the array list from the top 5 array, if you can't there are <12 times so you cant get the avg
             try {
                 for (int i = 0; i < 12; i++) {
-                        top12.add(TimeConversion.stringToSec(list.get(i)));
+                	top12.add(TimeConversion.stringToSec(list.get(i)));
                 }
             } catch (Exception e) {
                 return "N/A";
@@ -376,7 +307,6 @@ public class HomeScreen {
             
             //Iterate through the array and add the index's time to the sum of times if that index is not a best or worst time
             for (int i = 1; i < (top12.size()-1); i++) {        
-                //if (!(i == worstTimeIndex || i == bestTimeIndex)) 
             	sumOfTimes += top12.get(i);
             }
             
@@ -426,7 +356,7 @@ public class HomeScreen {
          */
         public ArrayList<String> getListOfTimes(String fileName) throws IOException {
             //Init the array with using the get text file values method and reverse it so the latest time is first
-        	String[] tempListOfTimes = reverseArray(getTextFileValues(fileName));
+        	String[] tempListOfTimes = getTextFileValues(fileName);
         	//Set the global number of the number of times
             String[] listOfTimes = new String[tempListOfTimes.length];
             
@@ -458,7 +388,6 @@ public class HomeScreen {
             //Init printWriter
         	PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(workingDir+fileToWrite)));
         	//Reverse the array list
-        	Collections.reverse(listOfTimes);
             
         	//Run a for loop that adds all times
         	for (int i = 0; i < listOfTimes.size(); i++) {

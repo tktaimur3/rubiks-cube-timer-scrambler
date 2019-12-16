@@ -12,15 +12,6 @@ public class Cube2x2 extends Cube {
 	//constructors\\
 	
 	Cube2x2() {
-		/*setFrontFace(new char[2][2]);
-		setBackFace(new char[2][2]);
-		setLeftFace(new char[2][2]);
-		setRightFace(new char[2][2]);
-		setUpFace(new char[2][2]);
-		setDownFace(new char[2][2]);
-		
-		fillArrays();
-		scramble();*/
 		super(2, 9, 1);
 	}
 	

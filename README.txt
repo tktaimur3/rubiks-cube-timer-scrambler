@@ -6,4 +6,7 @@ The UI includes literally everything that you see
 The algorithms for the scramble itself was created by my partner, Chris
 
 I also created the actual timer itself and the formatting of the timer. This includes dealing with minutes, seconds, and milliseconds.
-(Which was a huge pain btw).
+(Which was a challenge and a half).
+
+Note that in the Cube classes (Cube, Cube2x2, ... etc.) and TimeConversion class are not commented. This is because the commented
+files were kept on school computers and was unfortunately deleted
