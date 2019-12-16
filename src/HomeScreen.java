@@ -906,7 +906,7 @@ public class HomeScreen {
                                          String currentAo5 = ao5(listOfTimes);
                                          if (!currentAo5.equals("N/A")) {
                                          	listOfAo5.add(0, currentAo5);    
-                                         	rewriteFile(selectedCube+"\\ao12.txt", listOfAo5);
+                                         	rewriteFile(selectedCube+"\\ao5.txt", listOfAo5);
                                          }
                                                  
                                          //Add current AO3 to the file
@@ -943,12 +943,6 @@ public class HomeScreen {
                                          ao3BestTime.setText(getBestTime(listOfAo3));
                                          ao12BestTime.setText(getBestTime(listOfAo12));
                                          
-                                         //Create the file for sorted times for all the averages and all times
-                                         //sortTimes(selectedCube+"\\Rubik'sTimes.txt", selectedCube+"\\allTimesSorted.txt");
-                                         //sortTimes(selectedCube+"\\ao3.txt", selectedCube+"\\ao3Sorted.txt");
-                                         //sortTimes(selectedCube+"\\ao5.txt", selectedCube+"\\ao5Sorted.txt");
-                                         //sortTimes(selectedCube+"\\ao12.txt", selectedCube+"\\ao12Sorted.txt");
-                                         
                                          //Create a new scramble
                                          ((MyPanel)algorithmDisplay).newScramble();
                                          algorithm.setText("<html>"+((MyPanel)algorithmDisplay).getAlgorithm()+"</html>");
@@ -956,7 +950,7 @@ public class HomeScreen {
                                          
                                          //Tripped bool is set to true 
                                          tripped = true;
-                                                                                  }
+                                     }
                                  } catch (IOException e1) {
                                      e1.printStackTrace();
                                  }
